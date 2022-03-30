@@ -28,12 +28,16 @@ desc <- substr(desc,T, nchar(desc)-3)
 
 >`r desc`
 
+# A SHOT from the show
 
+In case you are curious to meet the Griffin's lovely family, here's a <span style="color: red;">nice SHOT</span> from them.  
 
+```{r, echo=FALSE}
+# Define variable containing url
+url <- "https://64.media.tumblr.com/a0f6ad5a24c72e407d0668da7eb1bc8a/tumblr_nrl0zrek1E1txi1hfo1_400.gifv"
+```
 
-
-
-
+<center><img src="`r url`"></center>
 
 
 
