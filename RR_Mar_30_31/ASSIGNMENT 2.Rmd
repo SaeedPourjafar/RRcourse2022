@@ -13,7 +13,7 @@ library(rvest)
 
 
 # A brief description
-The below paragraph for the *Family Guy* series has been scraped directly from the [Wikipedia](https://en.wikipedia.org/wiki/Family_Guy) page. I hide the source code here for more readability. Please refer to [ASSIGNMENT 2.Rmd](https://github.com/SaeedPourjafar/RRcourse2022/blob/7d8f55fc5417e7a8878b6161db2cfd3b840a249a/RR_Mar_30_31/ASSIGNMENT%202.Rmd) for the source code. Enjoy!
+The below paragraph for the <span style="text-decoration: underline">__*Family Guy*__</span> series which created by *Seth MacFarlane*, has been scraped directly from the [Wikipedia](https://en.wikipedia.org/wiki/Family_Guy) page. I hide the source code here for more readability. Please refer to [ASSIGNMENT 2.Rmd](https://github.com/SaeedPourjafar/RRcourse2022/blob/7d8f55fc5417e7a8878b6161db2cfd3b840a249a/RR_Mar_30_31/ASSIGNMENT%202.Rmd) for the source code. Enjoy!
 
 ```{r,include=FALSE, cache=TRUE}
 desc_url <- "https://en.wikipedia.org/wiki/Family_Guy"
