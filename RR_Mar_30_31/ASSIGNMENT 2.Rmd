@@ -1,12 +1,32 @@
 ---
-title: "ASSIGNMENT 2"
+title: "Family Guy"
 author: 
   - Mohammad Saeed Pourjafar^[University of Warsaw, m.pourjafar@student.uw.edu.pl]
 date: "30/3/2022"
 output: rmdformats::readthedown
 ---
+Loading the usual suspects!
+```{r, message=FALSE}
+library(dplyr)
+library(rvest)
+```
 
 
+# A brief description
+The below paragraph for the *Family Guy* series has been scraped directly from the [Wikipedia](https://en.wikipedia.org/wiki/Family_Guy) page. I hide the source code here for more readability. Please refer to [ASSIGNMENT 2.Rmd](https://github.com/SaeedPourjafar/RRcourse2022/blob/7d8f55fc5417e7a8878b6161db2cfd3b840a249a/RR_Mar_30_31/ASSIGNMENT%202.Rmd) for the source code. Enjoy!
+
+```{r,include=FALSE, cache=TRUE}
+desc_url <- "https://en.wikipedia.org/wiki/Family_Guy"
+
+desc <- desc_url %>%
+  read_html() %>% 
+  html_nodes(xpath='//*[@id="mw-content-text"]/div[1]/p[2]') %>%
+  html_text()
+  
+desc <- substr(desc,T, nchar(desc)-3)
+```
+
+>`r desc`
 
 
 
