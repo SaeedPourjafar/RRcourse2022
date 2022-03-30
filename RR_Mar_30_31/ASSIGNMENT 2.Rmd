@@ -10,6 +10,7 @@ Loading the usual suspects!
 library(dplyr)
 library(stringr)
 library(rvest)
+library(ggplot2)
 ```
 
 
@@ -66,7 +67,14 @@ table <- table %>%
   mutate(Rank = str_extract(Rank, "[^\\[]+")) %>%
   mutate(`Viewers(in millions)` = str_extract(`Viewers(in millions)`, "[^\\[]+"))
 
+# Changing some data types
 table$`Last aired`[20] <- "TBA"
+table$`First aired` <- as.Date(table$`First aired`)
+table$`Last aired` <- as.Date(table$`Last aired`)
+table$`Viewers(in millions)` <- as.numeric(table$`Viewers(in millions)`)
+table$Season <- as.numeric(table$Season)
+table$Episodes <- as.numeric(table$Episodes)
+table$Rank <- as.numeric(table$Rank)
 ```
 
 For this point, after scraping some data in R which corresponds to [this table](https://en.wikipedia.org/wiki/Family_Guy#Episodes). We found that currently there are **`r no_of_seasons`** seasons aired on FOX network from **`r first_aired`** up until now. The average number of episodes for each season is **`r avg_episode`**. For more details we can see the details in the table below which shows the season, number of episodes, rank, first and last aired date amont the number of viewers in million:
@@ -75,9 +83,21 @@ For this point, after scraping some data in R which corresponds to [this table](
 knitr::kable(table)
 ```
 
+# A graph of the viewership over time
 
+Here's the plot of number of viewers in million per season.
 
-
+```{r, echo=FALSE, message=FALSE}
+ggplot(table, aes(x =`First aired`, y = `Viewers(in millions)`)) +           
+  geom_line() + 
+  scale_x_date(date_labels = "%Y-%m-%d") + 
+  geom_line(color="red", size = 1)+
+  geom_point(size=2) + 
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.5)) + 
+  scale_x_date(date_labels="%b %Y", breaks = unique(table$`First aired`)) +
+  labs(title="Plot of viewers by season",
+        x ="Aired date", y = "Viewers in million")
+```
 
 
 
