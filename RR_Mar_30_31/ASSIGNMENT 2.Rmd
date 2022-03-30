@@ -1,0 +1,45 @@
+---
+title: "ASSIGNMENT 2"
+author: 
+  - Mohammad Saeed Pourjafar^[University of Warsaw, m.pourjafar@student.uw.edu.pl]
+date: "30/3/2022"
+output: rmdformats::readthedown
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
