@@ -99,7 +99,21 @@ ggplot(table, aes(x =`First aired`, y = `Viewers(in millions)`)) +
         x ="Aired date", y = "Viewers in million")
 ```
 
+# A graph of the season-to-season changes in viewership
+```{r, echo=FALSE, cache=TRUE, message=FALSE}
+table <- table %>%
+  mutate(diff = `Viewers(in millions)` - lag(`Viewers(in millions)`, default = first(`Viewers(in millions)`)))
+```
 
+And here's the plot of of the season-to-season changes in viewership.
+
+```{r, echo=FALSE, message=FALSE, cache=TRUE}
+ggplot(data=table, aes(x=Season, y=diff)) +
+  geom_bar(stat="identity", fill="steelblue")+
+  theme_grey() +
+  labs(title="Plot of the change of viewers season by season",
+       x ="Saeson", y = "Viewers in million")
+```
 
 
 
