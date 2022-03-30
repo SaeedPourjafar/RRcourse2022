@@ -8,6 +8,7 @@ output: rmdformats::readthedown
 Loading the usual suspects!
 ```{r, message=FALSE}
 library(dplyr)
+library(stringr)
 library(rvest)
 ```
 
@@ -39,6 +40,40 @@ url <- "https://64.media.tumblr.com/a0f6ad5a24c72e407d0668da7eb1bc8a/tumblr_nrl0
 
 <center><img src="`r url`"></center>
 
+# A summary of some basic statistics
+
+```{r, include=FALSE, cache=TRUE}
+# The table for rank and viewers
+table <- desc_url %>%
+  read_html() %>% 
+  html_nodes(xpath='//*[@id="mw-content-text"]/div[1]/table[2]/tbody') %>% 
+  html_table(fill=TRUE)
+
+# Changing the header names
+names(table[[1]]) <- table[[1]][1,]
+table <- table[[1]][-1,c(-1,-3)] # Removing the duplicated columns
+no_of_seasons <- nrow(table)
+first_aired <- substr(table$`First aired`[1],T,16)
+avg_episode <- round(mean(as.numeric(table$Episodes)))
+
+table <- table %>%
+  mutate(`First aired` = 
+          gsub("[\\(\\)]", "", 
+          regmatches(`First aired`, gregexpr("\\(.*?\\)", `First aired`)))) %>%
+  mutate(`Last aired` = 
+           gsub("[\\(\\)]", "", 
+                regmatches(`Last aired`, gregexpr("\\(.*?\\)", `Last aired`)))) %>%
+  mutate(Rank = str_extract(Rank, "[^\\[]+")) %>%
+  mutate(`Viewers(in millions)` = str_extract(`Viewers(in millions)`, "[^\\[]+"))
+
+table$`Last aired`[20] <- "TBA"
+```
+
+For this point, after scraping some data in R which corresponds to [this table](https://en.wikipedia.org/wiki/Family_Guy#Episodes). We found that currently there are **`r no_of_seasons`** seasons aired on FOX network from **`r first_aired`** up until now. The average number of episodes for each season is **`r avg_episode`**. For more details we can see the details in the table below which shows the season, number of episodes, rank, first and last aired date amont the number of viewers in million:
+
+```{r, echo=FALSE, cache=TRUE}
+knitr::kable(table)
+```
 
 
 
