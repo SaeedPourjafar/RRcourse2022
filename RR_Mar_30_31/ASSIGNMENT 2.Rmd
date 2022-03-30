@@ -43,7 +43,7 @@ url <- "https://64.media.tumblr.com/a0f6ad5a24c72e407d0668da7eb1bc8a/tumblr_nrl0
 
 # A summary of some basic statistics
 
-```{r, include=FALSE, cache=TRUE}
+```{r, include=FALSE, cache=TRUE, warning=FALSE}
 # The table for rank and viewers
 table <- desc_url %>%
   read_html() %>% 
@@ -54,6 +54,8 @@ table <- desc_url %>%
 names(table[[1]]) <- table[[1]][1,]
 table <- table[[1]][-1,c(-1,-3)] # Removing the duplicated columns
 no_of_seasons <- nrow(table)
+
+# Some calculated vales to use inline text
 first_aired <- substr(table$`First aired`[1],T,16)
 avg_episode <- round(mean(as.numeric(table$Episodes)))
 
@@ -87,7 +89,7 @@ knitr::kable(table)
 
 Here's the plot of number of viewers in million per season.
 
-```{r, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(table, aes(x =`First aired`, y = `Viewers(in millions)`)) +           
   geom_line() + 
   scale_x_date(date_labels = "%Y-%m-%d") + 
@@ -100,14 +102,14 @@ ggplot(table, aes(x =`First aired`, y = `Viewers(in millions)`)) +
 ```
 
 # A graph of the season-to-season changes in viewership
-```{r, echo=FALSE, cache=TRUE, message=FALSE}
+```{r, echo=FALSE, cache=TRUE, message=FALSE, fig.dim= c(6,3)}
 table <- table %>%
   mutate(diff = `Viewers(in millions)` - lag(`Viewers(in millions)`, default = first(`Viewers(in millions)`)))
 ```
 
 And here's the plot of of the season-to-season changes in viewership.
 
-```{r, echo=FALSE, message=FALSE, cache=TRUE}
+```{r, echo=FALSE, message=FALSE, cache=TRUE, warning=FALSE}
 ggplot(data=table, aes(x=Season, y=diff)) +
   geom_bar(stat="identity", fill="steelblue")+
   theme_grey() +
@@ -115,24 +117,18 @@ ggplot(data=table, aes(x=Season, y=diff)) +
        x ="Saeson", y = "Viewers in million")
 ```
 
+# A short description of the observed changes
 
+```{r, echo=FALSE, cache=TRUE, include=FALSE}
+decreased_calculated_number <- abs(round((table$diff[2]/table$`Viewers(in millions)`[1])*100,2))
+increased_calculated_number <- round((table$diff[4]/table$`Viewers(in millions)`[3])*100,2)
+avg_viewers <- round(mean(table$`Viewers(in millions)`, na.rm = T),2)
+```
 
+No shows or series can lasts forever. As we can observe from the plot above, we can immediately recognize the decreased changes of number of viewers through seasons. This change can be seen as a dramatic shift between season 1 and 2 in which the number of viewers has been decreased by `r decreased_calculated_number` percent. However the good news is that the after that the show gains some positive feedback which the result can bee seen in the changes from season 3 to season 4 where the number of viewers increased by `r increased_calculated_number`. In the end the average number of viewers as of now is `r avg_viewers` millions. 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<style>
+body {
+text-align: justify}
+</style>
 <div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
