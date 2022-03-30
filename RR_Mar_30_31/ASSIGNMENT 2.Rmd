@@ -125,7 +125,7 @@ increased_calculated_number <- round((table$diff[4]/table$`Viewers(in millions)`
 avg_viewers <- round(mean(table$`Viewers(in millions)`, na.rm = T),2)
 ```
 
-No shows or series can lasts forever. As we can observe from the plot above, we can immediately recognize the decreased changes of number of viewers through seasons. This change can be seen as a dramatic shift between season 1 and 2 in which the number of viewers has been decreased by `r decreased_calculated_number` percent. However the good news is that the after that the show gains some positive feedback which the result can bee seen in the changes from season 3 to season 4 where the number of viewers increased by `r increased_calculated_number`. In the end the average number of viewers as of now is `r avg_viewers` millions. 
+No shows or series can lasts forever. As we can observe from the plot above, we can immediately recognize the decreased changes of number of viewers through seasons. This change can be seen as a dramatic shift between season 1 and 2 in which the number of viewers has been decreased by **`r decreased_calculated_number`** percent. However the good news is that the after that the show gains some positive feedback which the result can bee seen in the changes from season 3 to season 4 where the number of viewers increased by **`r increased_calculated_number`**. In the end the average number of viewers as of now is **`r avg_viewers`** millions. 
 
 <style>
 body {
