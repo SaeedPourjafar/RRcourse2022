@@ -12,7 +12,7 @@ library(rmarkdown)
 
 # render("RMD_class_1_cut.Rmd")
 
-# Running the code below will create 8 reports in pdf
+# Running the code below will create 8 reports in pdf 
 for (data in c('season_1.RDATA','season_2.RDATA',
                'season_3.RDATA','season_4.RDATA',
                'season_5.RDATA','season_6.RDATA',
