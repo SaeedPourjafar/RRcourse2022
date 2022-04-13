@@ -1,14 +1,14 @@
 ---
-title: "Exercise 2"
-author: "Wojciech Hardy; Łukasz Nawaro"
-date: "3/29/2022"
+title: Game of Thrones
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-load("../Data/season_1.RData")
+load("../Data/season_1.RData") 
 ```
+
+## Please refer to **"Assignment_3_DONE.Rmd"** and **"Codes and instructions.R"**
+
 
 # Game of Thrones - Season 1 summary in numbers
 
